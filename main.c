@@ -17,6 +17,7 @@ struct config
 {
     bool borders;
     bool printbefore;
+    bool count;
     char boardstr[BOARDTOTAL + 2];
 };
 
@@ -31,6 +32,7 @@ void help()
     puts("Options:");
     puts("  -p      Prints only the solved board and not the starting board");
     puts("  -b      Prints borders with board");
+    puts("  -c      Prints the number of possibility checks performed");
     puts("  -h      Prints the help menu");
     puts("  -v      Prints the version number");
 }
@@ -39,10 +41,11 @@ void set_config(struct config *conf, int argc, char **argv)
 {
     conf->borders = false;
     conf->printbefore = true;
+    conf->count = false;
     conf->boardstr[0] = '\0';
 
     int opt;
-    while ((opt = getopt(argc, argv, "hvepb")) != -1)
+    while ((opt = getopt(argc, argv, "hvepbc")) != -1)
     {
         switch (opt)
         {
@@ -60,6 +63,9 @@ void set_config(struct config *conf, int argc, char **argv)
                 break;
             case 'b':
                 conf->borders = true;
+                break;
+            case 'c':
+                conf->count = true;
                 break;
             case '?':
                 fprintf(stderr, "Invalid option %c given\n", optopt);
@@ -87,15 +93,23 @@ bool solve_board(const struct config *conf)
     if (conf->printbefore)
 	    print_board(board, conf->borders);
 
-    const bool solved = solve(board);
+    unsigned long long counter = 0;
+    unsigned long long *count_ptr = conf->count ? &counter : NULL;
+    const bool solved = solve(board, count_ptr);
     if (solved)
     {
-        puts("Solved!");
+        if (conf->count)
+            printf("Solved in %llu checks!\n", counter);
+        else
+            puts("Solved!");
         print_board(board, conf->borders);
     }
     else
     {
-        puts("Unable to solve...");
+        if (conf->count)
+            printf("Unable to solve in %llu checks...\n", counter);
+        else
+            puts("Unable to solve...");
     }
     return solved;
 }

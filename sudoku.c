@@ -66,7 +66,7 @@ bool is_possibility(int *board, const int number, const size_t row, const size_t
     return (!row_contains(board, number, row) && !column_contains(board, number, col) && !square_contains(board, number, row, col));
 }
 
-static bool _solve(int *board, size_t row, size_t col)
+static bool _solve(int *board, size_t row, size_t col, unsigned long long *counter)
 {
     if (row == BOARDSIZE - 1 && col == BOARDSIZE)
         return true;
@@ -77,14 +77,16 @@ static bool _solve(int *board, size_t row, size_t col)
     }
 
     if (*board_value(board, row, col) != -1)
-        return _solve(board, row, col + 1);
+        return _solve(board, row, col + 1, counter);
 
     for (int i = 1; i <= BOARDSIZE; i++)
     {
+        if (counter != NULL)
+            (*counter)++;
         if (is_possibility(board, i, row, col))
         {
             *board_value(board, row, col) = i;
-            if (_solve(board, row, col + 1))
+            if (_solve(board, row, col + 1, counter))
                 return true;
             *board_value(board, row, col) = -1;
         }
@@ -92,9 +94,9 @@ static bool _solve(int *board, size_t row, size_t col)
     return false;
 }
 
-bool solve(int *board)
+bool solve(int *board, unsigned long long *counter)
 {
-    return _solve(board, 0, 0);
+    return _solve(board, 0, 0, counter);
 }
 
 static inline void print_char(const int v)

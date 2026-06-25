@@ -15,7 +15,7 @@
 int init_board(int *board, const char *const board_string);
 void print_board(int *board, const bool borders);
 int *board_value(int *board, const size_t row, const size_t col);
-bool solve(int *board);
+bool solve(int *board, unsigned long long *counter);
 bool is_possibility(int *board, const int number, const size_t row, const size_t col);
 char *err2str(const int errcode);
 
