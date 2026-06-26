@@ -1,7 +1,7 @@
-#include "sudoku.h"
-
 #include <stdio.h>
 #include <string.h>
+
+#include "sudoku.h"
 
 static inline bool is_empty_char(const char c)
 {
