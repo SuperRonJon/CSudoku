@@ -138,9 +138,9 @@ char *err2str(const int errcode)
         return "No error";
     switch (errcode)
     {
-        case -1:
+        case INVALID_LENGTH:
             return "Invalid board length, must be 81 characters long";
-        case -2:
+        case INVALID_CHARACTER:
             return "Invalid character in board. Valid characters are digits and empty characters can be any of \"x . 0\"";
         default:
             return "Unknown error";
