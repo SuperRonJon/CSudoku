@@ -1,3 +1,4 @@
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,11 +17,11 @@ void help()
 {
     usage();
     puts("Options:");
-    puts("  -p      Prints only the solved board and not the starting board");
-    puts("  -b      Prints borders with board");
-    puts("  -c      Prints the number of possibility checks performed");
-    puts("  -h      Prints the help menu");
-    puts("  -v      Prints the version number");
+    puts("  --print-after,  -p      Prints only the solved board and not the starting board");
+    puts("  --border,       -b      Prints borders with board");
+    puts("  --count,        -c      Prints the number of possibility checks performed");
+    puts("  --help,         -h      Prints the help menu");
+    puts("  --version,      -v      Prints the version number");
 }
 
 void set_config(struct config *conf, int argc, char **argv)
@@ -30,8 +31,19 @@ void set_config(struct config *conf, int argc, char **argv)
     conf->count = false;
     conf->boardstr[0] = '\0';
 
+    static struct option long_options[] = 
+    {
+        {"help", no_argument, NULL, 'h'},
+        {"version", no_argument, NULL, 'v'},
+        {"example", no_argument, NULL, 'e'},
+        {"print-after", no_argument, NULL, 'p'},
+        {"border", no_argument, NULL, 'b'},
+        {"count", no_argument, NULL, 'c'},
+        {0, 0, 0, 0},
+    };
+
     int opt;
-    while ((opt = getopt(argc, argv, "hvepbc")) != -1)
+    while ((opt = getopt_long(argc, argv, "hvepbc", long_options, NULL)) != -1)
     {
         switch (opt)
         {
