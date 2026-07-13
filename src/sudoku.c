@@ -105,12 +105,6 @@ static inline void print_char(const int v)
     putchar(c);
 }
 
-int *board_value(int *board, const size_t row, const size_t col)
-{
-    const size_t i = (BOARDSIZE * row) + col;
-    return &board[i];
-}
-    
 void print_board(int *board, const bool borders)
 {
     const size_t board_len = BOARDSIZE * BOARDSIZE;
