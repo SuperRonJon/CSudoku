@@ -1,5 +1,6 @@
 CC 			?= cc
-CFLAGS		?= -Wall -Wextra -Werror -O2
+CFLAGS		?= -Wall -Wextra -Werror -O3 -DNDEBUG
+DBGFLAGS	?= -Wall -Wextra -Werror -Og -g
 
 BUILDDIR	:= build
 SRCDIR		:= src
@@ -32,7 +33,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(DEBUGTARGET): $(SRCS) | $(BUILDDIR)
-	$(CC) $(CFLAGS) -g $^ -o $@
+	$(CC) $(DBGFLAGS) $^ -o $@
 
 $(BUILDDIR):
 	@mkdir -p build
