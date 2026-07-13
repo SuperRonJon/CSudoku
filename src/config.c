@@ -20,6 +20,7 @@ void help()
     puts("  --print-after,  -p      Prints only the solved board and not the starting board");
     puts("  --border,       -b      Prints borders with board");
     puts("  --count,        -c      Prints the number of possibility checks performed");
+    puts("  --example,      -e      Prints an example input board string");
     puts("  --help,         -h      Prints the help menu");
     puts("  --version,      -v      Prints the version number");
 }
