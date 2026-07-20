@@ -3,7 +3,9 @@
 CLI Sudoku puzzle solver
 
 ```
+$ sudoku --border x56xxx27872xx361xx8xxxxx46x5xxx47xxx4x9xxx7x5xxx65xxx4x35xxxxx7xx718xx32918xxx54x
 $ sudoku -b x56xxx27872xx361xx8xxxxx46x5xxx47xxx4x9xxx7x5xxx65xxx4x35xxxxx7xx718xx32918xxx54x
+
 x 5 6 | x x x | 2 7 8
 7 2 x | x 3 6 | 1 x x
 8 x x | x x x | 4 6 x
@@ -36,9 +38,9 @@ $ sudoku --help
 Usage:
       sudoku [OPTIONS...] <board-string>
 Options:
-  --print-after,  -p      Prints only the solved board and not the starting board
   --border,       -b      Prints borders with board
   --count,        -c      Prints the number of possibility checks performed
+  --print-after,  -p      Prints only the solved board and not the starting board
   --example,      -e      Prints an example input board string
   --help,         -h      Prints the help menu
   --version,      -v      Prints the version number
