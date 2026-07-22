@@ -5,7 +5,7 @@
 
 static inline bool is_empty_char(const char c)
 {
-    return (c == 'x' || c == 'X' || c == '.' || c == '0');
+    return (c == 'x' || c == 'X' || c == '.' || c == '0' || c == 'O' || c == 'o');
 }
 
 static inline bool row_contains(int *board, const int number, const size_t row)
